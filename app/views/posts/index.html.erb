@@ -1,3 +1,39 @@
 <h3>Welcome!</h3>
 
 <p>This is the Postit template. You've access the PostsController, index action. This is the index template. Find me under app/views/posts folder.</p>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Vote</th>
+      <th>Title</th>
+      <th>Url</th>
+      <th>Description</th>
+      <th>Author</th>
+    </tr>
+  </thead>
+  
+  <tbody>  
+    <% @posts.each do |post| %>
+    <tr>
+      <td>
+        <%= link_to vote_post_path(post), :method => :post do %>
+          <i class="icon-thumbs-up"></i>
+        <% end %>
+        <%= link_to vote_post_path(post) do %>
+          <i class="icon-thumbs-down"></i>
+        <% end %>
+      </td>
+      <td><%= post.title %></td>
+      <td><%= post.url %></td>
+      <td><%= post.description %></td>
+      <td><%= post.creator.username %></td>
+      <td>
+        <%= link_to "Show", post_path(post) %>
+        <%= link_to("Edit", edit_post_path(post)) if logged_in? %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+
+</table>

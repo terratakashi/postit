@@ -1,0 +1,10 @@
+<h3>This is the test for non-model backed form.</h3>
+
+<%= form_tag "/feedback" do %>
+  <%= label_tag "name" %>
+  <%= text_field_tag 'search', "here", placeholder: 'Enter search term...' %>
+  <%= label_tag "Password" %>
+  <%= password_field_tag 'secret', 'abcd1234' %>
+  <%= submit_tag "Submit" %>
+  <%= image_submit_tag "pic.jpg" %>
+<% end %>

@@ -2,7 +2,47 @@
   <li>
     <%= link_to "Postit!", root_path, :class => 'brand' %>
   </li>
+
   <li>
-    <%= link_to 'link', '' %>
+    <ul class="nav nav-tabs">
+      <li class="dropdown">
+        <%= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
+          Category
+          <b class="caret"></b>
+        <% end %>
+
+        <ul class="dropdown-menu">
+          <% @categories.each do |category| %>
+            <li>
+              <%= link_to tag_path(category.name) do %>
+                <i class="icon-tag"></i> <%= category.name %>
+              <% end %>
+            </li>
+          <% end %>
+          <!-- submenu for login-->
+          <% if logged_in? %>
+            <li class="divider"></li>
+            <li>
+              <%= link_to new_category_path do %>
+                <i class="icon-plus"></i> Add Tag
+              <% end %>
+            </li>
+          <% end %>
+        </ul>
+      </li>
+    </ul>
   </li>
+  
+  <% if logged_in? %>
+    <li>
+      <%= link_to new_post_path do %>
+        <i class="icon-plus"></i> New Post
+      <% end %>
+    </li>
+    <li><%= link_to "Test form", feedback_path %></li>
+    <li><%= link_to "Sign out", logout_path %></li>
+  <% else %>
+    <li><%= link_to "Sign up", signup_path %></li>
+    <li><%= link_to "Sign in", login_path %></li>
+  <% end %>
 </ul>

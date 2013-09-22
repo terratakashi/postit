@@ -1,0 +1,52 @@
+<%= render "shared/errors", obj: @comment %>
+
+<p><strong>Author:</strong></p>
+<p>
+  <%= @post.creator.username %>
+</p>
+
+<p><strong>Title:</strong></p>
+<p>
+  <%= @post.title %>
+</p>
+
+<p><strong>URL:</strong></p>
+<p>
+  <%= link_to pretty_url(@post.url), pretty_url(@post.url) %>
+</p>
+
+<p><strong>Description</strong></p>
+<p>
+  <%= @post.description %>
+</p>
+
+<p><strong>Tag:</strong></p>
+<p>
+  <ul>
+    <% @post.categories.each do |category| %>
+      <li><%= category.name %></li>
+    <% end %>
+  </ul>
+</p>
+
+<italic>Created at <%= pretty_date(@post.created_at) %></italic>
+
+<p><strong>Comments</strong></p>
+<% index = 1 %>
+<% @comments.each do |comment| %>
+  <p>#<%= index %> Comment</p>
+  <p><%= comment.body %></p>
+  <p>Created by <%= comment.creator.username %></p>
+  <% index += 1 %>
+<% end %>
+
+
+<p><strong>Make a Comment:</strong></p>
+<%= form_for [@post, @comment] do |f| %>
+  <%= f.text_area :body %>
+  <br>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "Back", posts_path %>
+<%= link_to "Edit", edit_post_path(@post) %>
