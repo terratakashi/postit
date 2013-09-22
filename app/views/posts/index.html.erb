@@ -17,10 +17,11 @@
     <% @posts.each do |post| %>
     <tr>
       <td>
-        <%= link_to vote_post_path(post), :method => :post do %>
+        <%= link_to vote_post_path(post, :vote => true), :method => :post do %>
           <i class="icon-thumbs-up"></i>
         <% end %>
-        <%= link_to vote_post_path(post) do %>
+        <strong><%= noquery_vote(post.votes) %></strong>
+        <%= link_to vote_post_path(post, :vote => false), :method => :post do %>
           <i class="icon-thumbs-down"></i>
         <% end %>
       </td>

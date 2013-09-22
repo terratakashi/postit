@@ -1,13 +1,13 @@
 class PostsController < ApplicationController
-  before_action :get_post, only: [:show, :update, :edit]
-  before_action :require_login, only: [:new, :create, :edit, :update]
+  before_action :get_post, only: [:show, :update, :edit, :vote]
+  before_action :require_login, only: [:new, :create, :edit, :update, :vote]
 
   def index
-    @posts = Post.includes(:creator).all
+    @posts = Post.includes(:creator, :votes).all
   end
 
   def show
-    @comments = @post.comments.includes(:creator)
+    @comments = @post.comments.includes(:creator, :votes)
     @comment = Comment.new if @comment.nil?
   end
 
@@ -36,6 +36,16 @@ class PostsController < ApplicationController
   end
 
   def edit
+  end
+
+  def vote
+    vote = Vote.new(:user => current_user, :votable => @post, :vote => params[:vote])
+    if vote.save 
+      flash[:notice] = "Vote success!"
+    else
+      flash[:error] = "Vote fail!"
+    end
+    redirect_to root_path
   end
 
   private
