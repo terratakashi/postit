@@ -2,10 +2,12 @@ class Vote < ActiveRecord::Base
   belongs_to :votable, :polymorphic => true
   belongs_to :user
 
-  #validate :check_record
+  validate :check_record
 
   def check_record
-    errors.add(:base, "You have already voted.") if self.new_record?
+    if Vote.exists?(:user => user, :votable => votable)
+      errors.add(:base, "You have already voted.") 
+    end
   end
 
 end
