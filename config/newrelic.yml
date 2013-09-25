@@ -3,7 +3,7 @@
 # Ruby, Java, .NET, PHP, and Python applications with deep visibility and low overhead.
 # For more information, visit www.newrelic.com.
 #
-# Generated September 24, 2013
+# Generated September 25, 2013
 #
 # This configuration file is custom generated for Caffeine_2
 
@@ -42,7 +42,7 @@ common: &default_settings
   #       - Ajax Service
   #       - All Services
   #
-  app_name: My Application
+  app_name: Go to Post it
 
   # When "true", the agent collects performance data about your
   # application and reports this data to the New Relic service at
