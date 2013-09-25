@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :require_login
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.find_by_slug(params[:post_id])
     @comment = @post.comments.new(secure_comment)
     @comment.creator = current_user
     if @comment.save

@@ -9,8 +9,19 @@ class Post < ActiveRecord::Base
   validates :url, :presence => true
   validates :description, :presence => true
 
-  def total_votes
-    self.votes.where(:vote => true).size - self.votes.where(:vote => false).size
-  end
+  after_validation :generate_slug
+# query vote count
+#  def total_votes
+#    self.votes.where(:vote => true).size - self.votes.where(:vote => false).size
+#  end
   
+  def generate_slug
+    self.slug = title.gsub(/\s/, "-").downcase
+  end  
+  
+  #overide the default to_parm (id)  
+  def to_param
+    self.slug
+  end
+
 end

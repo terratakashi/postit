@@ -16,9 +16,8 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    @category = Category.find_by_name(params[:categoryname])
-    #@category = Category.find(params[:id])
-    @posts = @category.posts.includes(:creator)
+    @category = Category.find_by_slug(params[:id])
+    @posts = @category.posts.includes(:creator, :votes)
     render "posts/index"
   end
 

@@ -14,7 +14,7 @@
         <ul class="dropdown-menu">
           <% @categories.each do |category| %>
             <li>
-              <%= link_to tag_path(category.name) do %>
+              <%= link_to category_path(category) do %>
                 <i class="icon-tag"></i> <%= category.name %>
               <% end %>
             </li>

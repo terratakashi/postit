@@ -11,7 +11,7 @@ PostitTemplate::Application.routes.draw do
       end
     end
   end
-  resources :categories, only: [:create, :new] 
+  resources :categories, only: [:create, :new, :show] 
 
   resources :users, only: [:create, :new, :edit, :update]
 
@@ -25,7 +25,6 @@ PostitTemplate::Application.routes.draw do
 
   get "/feedback", to: "static#feedback" 
   post "/feedback", to: "static#mail" 
-  get "/tag/:categoryname", to: "categories#show", :as => "tag"
 
 
 end

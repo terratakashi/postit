@@ -1,1 +1,1 @@
-$("#vote_comment_<%= params[:id] %>").html("<strong><%= noquery_vote(@comment.votes) %></strong>");
+$("#vote_comment_<%= params[:id] %>").html("<%= noquery_vote(@comment.votes) %>");
