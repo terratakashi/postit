@@ -40,12 +40,19 @@ class PostsController < ApplicationController
 
   def vote
     vote = Vote.new(:user => current_user, :votable => @post, :vote => params[:vote])
-    if vote.save 
-      flash[:notice] = "Vote success!"
-    else
-      flash[:error] = "Vote fail!"
+    respond_to do |format|
+
+      format.html do 
+        if vote.save 
+          flash[:notice] = "Vote success!"
+        else
+          flash[:error] = "Vote fail!"
+        end
+        redirect_to root_path
+      end
+      # respond to ajax
+      format.js {render :js => "alert('Vote fail!')" unless vote.save}
     end
-    redirect_to root_path
   end
 
   private

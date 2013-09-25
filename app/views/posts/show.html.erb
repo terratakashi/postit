@@ -37,11 +37,11 @@
   <p>#<%= index %> Comment</p>
   <p><%= comment.body %></p>
   <p>
-    Vote: <%= link_to vote_post_comment_path(@post, comment, :vote => true), :method => :post do %>
+    Vote: <%= link_to vote_post_comment_path(@post, comment, :vote => true), :method => :post, :remote => true do %>
             <i class="icon-thumbs-up"></i>
           <% end %>
-            <strong><%= noquery_vote(comment.votes) %></strong>
-          <%= link_to vote_post_comment_path(@post, comment, :vote => false), :method => :post do %>
+            <strong id="vote_<%= dom_id(comment) %>" ><%= noquery_vote(comment.votes) %></strong>
+          <%= link_to vote_post_comment_path(@post, comment, :vote => false), :method => :post, :remote => true do %>
             <i class="icon-thumbs-down"></i>
           <% end %>  
     | Created by <%= comment.creator.username %>

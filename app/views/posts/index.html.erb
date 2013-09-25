@@ -17,13 +17,13 @@
     <% @posts.each do |post| %>
     <tr>
       <td>
-        <%= link_to vote_post_path(post, :vote => true), :method => :post do %>
-          <i class="icon-thumbs-up"></i>
-        <% end %>
-        <strong><%= noquery_vote(post.votes) %></strong>
-        <%= link_to vote_post_path(post, :vote => false), :method => :post do %>
-          <i class="icon-thumbs-down"></i>
-        <% end %>
+          <%= link_to vote_post_path(post, :vote => true), :method => :post, :remote => true do %>
+            <i class="icon-thumbs-up"></i>
+          <% end %>
+            <strong id="vote_<%= dom_id(post) %>"><%= noquery_vote(post.votes) %></strong>
+          <%= link_to vote_post_path(post, :vote => false), :method => :post, :remote => true do %>
+            <i class="icon-thumbs-down"></i>
+          <% end %>
       </td>
       <td><%= post.title %></td>
       <td><%= post.url %></td>

@@ -14,15 +14,22 @@ class CommentsController < ApplicationController
   end
 
   def vote
-    comment = Comment.find(params[:id])
-    vote = Vote.new(:user => current_user, :votable => comment, :vote => params[:vote])
-    if vote.save 
-      flash[:notice] = "Vote success!"
-    else
-      flash[:error] = "Vote fail!"
+    @comment = Comment.find(params[:id])
+    vote = Vote.new(:user => current_user, :votable => @comment, :vote => params[:vote])
+    
+    respond_to do |format|
+
+      format.html do 
+        if vote.save 
+          flash[:notice] = "Vote success!"
+        else
+          flash[:error] = "Vote fail!"
+        end
+        redirect_to post_path(params[:post_id])
+      end
+      # respond to ajax
+      format.js {render :js => "alert('Vote fail!')" unless vote.save}
     end
-    binding.pry
-    redirect_to post_path(params[:post_id])
   end
 
 
