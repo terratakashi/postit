@@ -20,7 +20,7 @@
             </li>
           <% end %>
           <!-- submenu for login-->
-          <% if logged_in? %>
+          <% if logged_in? && current_user.admin? %>
             <li class="divider"></li>
             <li>
               <%= link_to new_category_path do %>

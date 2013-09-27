@@ -25,4 +25,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin
+    # Prevent user is nil, add user check
+    if !logged_in? || !current_user.admin?
+      flash[:warning] = "Please contact Admin!"
+      redirect_to root_path
+    end
+  end
+
 end
