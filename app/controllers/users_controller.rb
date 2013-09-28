@@ -18,18 +18,24 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
+    @user = User.find_by_slug(params[:id])
   end
 
   def update
-
+    @user = User.find_by_slug(params[:id])
+    if @user.update_attributes(secure_params) 
+      flash[:notice] = "The acoount of #{@user.username} has been updated."
+      redirect_to root_path
+    else
+      render "edit"
+    end
   end
 
 
   private
 
   def secure_params
-    params.require(:user).permit(:username, :password, :password_confirmation)
+    params.require(:user).permit(:username, :password, :password_confirmation, :time_zone)
   end
 
 end

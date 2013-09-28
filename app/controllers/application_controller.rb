@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   before_action :get_categories
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :user_zone
   protect_from_forgery with: :exception
 
 
@@ -30,6 +30,14 @@ class ApplicationController < ActionController::Base
     if !logged_in? || !current_user.admin?
       flash[:warning] = "Please contact Admin!"
       redirect_to root_path
+    end
+  end
+
+  def user_zone
+    if logged_in?
+      current_user.time_zone || Time.zone.name
+    else
+      Time.zone.name
     end
   end
 
