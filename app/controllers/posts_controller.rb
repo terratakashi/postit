@@ -4,6 +4,12 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.includes(:creator, :votes).all
+
+    respond_to do |format|
+      format.html {render :index}
+      format.js {render json: @posts}
+      format.xml {render xml: @posts}
+    end
   end
 
   def show
