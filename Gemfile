@@ -17,6 +17,7 @@ gem 'jbuilder', '~> 1.2'
 
 # my own gem
 gem 'votable-alex-test' 
+gem 'sluggable-alex-test'
 
 group :doc do
   gem 'sdoc', require: false
