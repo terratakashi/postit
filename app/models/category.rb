@@ -1,18 +1,13 @@
 class Category < ActiveRecord::Base
+  include Sluggable
+  
+  alias_attribute :sluggable, :name
+
   has_many :post_categories
   has_many :posts, :through => :post_categories
 
   validates :name, :presence => true, :uniqueness => true
 
   after_validation :generate_slug
-
-  def generate_slug
-    self.slug = name.gsub(/\s/, "-").downcase
-  end  
-
-  #overide the default to_parm (id)  
-  def to_param
-    self.slug
-  end
   
 end

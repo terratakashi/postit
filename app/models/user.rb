@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  include Sluggable
+  alias_attribute :sluggable, :username
+
   has_many :posts
   has_many :comments
   has_many :votes
@@ -10,16 +13,6 @@ class User < ActiveRecord::Base
   after_validation :generate_slug
 
   has_secure_password
-
-
-  def generate_slug
-    self.slug = username.downcase
-  end
-
-  #overide the default to_parm (id)  
-  def to_param
-    self.slug
-  end
 
   def admin?
     role == "admin"
